@@ -114,6 +114,7 @@ function! s:BESetup()
     autocmd TabEnter * call s:BETabEnter()
     autocmd BufNew * call s:BEAddBuffer()
     autocmd BufEnter * call s:BEActivateBuffer()
+    autocmd BufEnter * call s:BEFilterUnloadedBuffer()
     autocmd BufEnter * call s:BEAutoDeleteBuffer()
 
     autocmd BufWipeOut * call s:BEDeactivateBuffer(1)
@@ -242,6 +243,11 @@ function! s:BEAutoDeleteBuffer()
       call s:BEMRUPop(s:MRUList[-i])
     endfor
   endif
+endfunction
+
+" BEFilterUnloadedBuffer {{{1
+function! s:BEFilterUnloadedBuffer()
+  call filter(s:MRUList, 'bufloaded(v:val)')
 endfunction
 
 " BEDeactivateBuffer {{{1
@@ -1180,8 +1186,8 @@ let s:splitMode = ""
 let s:name = '[BufExplorer]'
 let s:refreshBufferList = 1
 let s:MRU_Exclude_List = ["[BufExplorer]","__MRU_Files__"]
-"1}}}
 
+" Custom Drop by dingye_2 {{{1
 command! -nargs=1 Drop call s:Drop("<args>")
 function! s:Drop(file)
   let winnr = bufwinnr(escape(a:file, "[]"))
@@ -1195,5 +1201,6 @@ function! s:Drop(file)
     endif
   endif
 endfunction
+"1}}}
 
 " vim:ft=vim foldmethod=marker sw=2
