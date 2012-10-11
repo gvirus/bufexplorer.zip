@@ -1185,7 +1185,7 @@ let s:originBuffer = 0
 let s:splitMode = ""
 let s:name = '[BufExplorer]'
 let s:refreshBufferList = 1
-let s:MRU_Exclude_List = ["[BufExplorer]","__MRU_Files__"]
+let s:MRU_Exclude_List = ["[BufExplorer]","__MRU_Files__", "__Tagbar__"]
 
 " Custom Drop by dingye_2 {{{1
 command! -nargs=1 Drop call s:Drop("<args>")
