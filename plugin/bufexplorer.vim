@@ -114,7 +114,7 @@ function! s:BESetup()
     autocmd TabEnter * call s:BETabEnter()
     autocmd BufNew * call s:BEAddBuffer()
     autocmd BufEnter * call s:BEActivateBuffer()
-    autocmd BufEnter * call s:BEFilterUnloadedBuffer()
+    autocmd BufEnter * call s:BEFilterUnlistedBuffer()
     autocmd BufEnter * call s:BEAutoDeleteBuffer()
 
     autocmd BufWipeOut * call s:BEDeactivateBuffer(1)
@@ -246,8 +246,8 @@ function! s:BEAutoDeleteBuffer()
 endfunction
 
 " BEFilterUnloadedBuffer {{{1
-function! s:BEFilterUnloadedBuffer()
-  call filter(s:MRUList, 'bufloaded(v:val)')
+function! s:BEFilterUnlistedBuffer()
+  call filter(s:MRUList, 'buflisted(v:val)')
 endfunction
 
 " BEDeactivateBuffer {{{1
